@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 
 
 /**
-* 认证失败后控制器
+* 认证失败后控制器，这个控制器的功能也可用一个proxy过滤器取代
 * 
 * @author wang guobo 王国波
 */

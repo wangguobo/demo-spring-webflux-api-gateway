@@ -4,7 +4,11 @@ import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
-
+/**
+* 网关过滤器模板方法父类
+* 
+* @author wang guobo 王国波
+*/
 abstract public class AbstractGatewayWebFilter  implements WebFilter{
 	private static final String SKIP_PROCESSING_ATTR = "skip-webflux-exchange";
 	
