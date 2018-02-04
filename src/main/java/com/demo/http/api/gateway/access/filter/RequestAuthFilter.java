@@ -28,30 +28,30 @@ public  class RequestAuthFilter implements WebFilter {
     AppInfoProvider appInfoProvider;
 
     @Override
-    public Mono<Void> filter(ServerWebExchange serverWebExchange, WebFilterChain webFilterChain) {
-    	    serverWebExchange.getAttributes().put(Constant.WEB_FILTER_ATTR_NAME,webFilterChain);
-    	    if(!authRequest(serverWebExchange)) {
+    public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
+    	    exchange.getAttributes().put(Constant.WEB_FILTER_ATTR_NAME,chain);
+    	    if(!authRequest(exchange)) {
     		   //forward to 验证失败后controller
-    	    	   return WebfluxForwardingUtil.forward(Constant.AUTH_FAILED_PATH, serverWebExchange,null);
+    	    	   return WebfluxForwardingUtil.forward(Constant.AUTH_FAILED_PATH, exchange,null);
         }
         else {
         	   //forward to 反向代理reverse proxy controller
-           return webFilterChain.filter(serverWebExchange);
+           return chain.filter(exchange);
         }
     }
     
     /**
      * 请求认证、授权
-     * @param serverWebExchange
+     * @param exchange
      * @return  验证失败返回false,成功true
      */
-    private boolean authRequest(ServerWebExchange serverWebExchange)
+    private boolean authRequest(ServerWebExchange exchange)
     {
-        ServerHttpRequest frontReq =  serverWebExchange.getRequest();
+        ServerHttpRequest frontReq =  exchange.getRequest();
         
         String appKey = frontReq.getHeaders().getFirst(APPKEY_HTTP_HEAD);
         if (null == appKey) {
-            serverWebExchange.getAttributes().put(Constant.AUTH_ERROR_ATTR_NAME,NO_APPKEY);
+            exchange.getAttributes().put(Constant.AUTH_ERROR_ATTR_NAME,NO_APPKEY);
             return false;
         }
         
