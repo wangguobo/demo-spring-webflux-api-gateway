@@ -1,4 +1,4 @@
-package com.demo.http.api.gateway.access.filter.adapter;
+package com.demo.http.api.gateway.access.filter.base;
 
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
@@ -22,12 +22,12 @@ abstract public class AbstractGatewayWebFilter  implements WebFilter{
 	
 	/*模板方法，子类实现，在该方法中执行过滤逻辑
 	 * 
-	 * @param serverWebExchange the current server exchange
-	 * @webFilterChain provides a way to delegate to the next filter
+	 * @param exchange the current server exchange
+	 * @param chain provides a way to delegate to the next filter
 	 * @return {@code Mono<Boolean>} 过滤结果：通过还是不通过。TRUE表示过滤通过(pass)，控制流传递到下个filter；FALSE 不通过(deny)，
 	 * 控制流不会传递到下个filter，而是调用doDenyResponse返回过滤不通过的响应结果。
 	 */
-	protected abstract Mono<Boolean> doFilter(ServerWebExchange serverWebExchange, WebFilterChain webFilterChain);
+	protected abstract Mono<Boolean> doFilter(ServerWebExchange exchange, WebFilterChain chain);
 	
 	/*模板方法，子类实现，在该方法中返回过滤未通过的响应结果
 	 * 
@@ -42,7 +42,7 @@ abstract public class AbstractGatewayWebFilter  implements WebFilter{
 	}
 	
 	//是否跳过对该请求的处理
-	private boolean isSkip(ServerWebExchange serverWebExchange) {
-		return Boolean.TRUE == (Boolean)serverWebExchange.getAttribute(SKIP_PROCESSING_ATTR);
+	private boolean isSkip(ServerWebExchange exchange) {
+		return Boolean.TRUE == (Boolean)exchange.getAttribute(SKIP_PROCESSING_ATTR);
 	}
 }

@@ -7,6 +7,7 @@ import com.demo.http.api.gateway.constant.ErrorEnum;
 * @author wang guobo 王国波
 */
 public class ResponseModel {
+	//error code 
     int code;
     String message;
     boolean success = false;
