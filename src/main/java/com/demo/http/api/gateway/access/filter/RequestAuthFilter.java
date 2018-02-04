@@ -10,6 +10,8 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import com.demo.http.api.gateway.constant.Constant;
 import com.demo.http.api.gateway.service.AppInfoProvider;
+import com.demo.http.api.gateway.util.WebfluxForwardingUtil;
+
 import reactor.core.publisher.Mono;
 
 /**
@@ -28,12 +30,9 @@ public  class RequestAuthFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange serverWebExchange, WebFilterChain webFilterChain) {
     	    serverWebExchange.getAttributes().put(Constant.WEB_FILTER_ATTR_NAME,webFilterChain);
-    	    
     	    if(!authRequest(serverWebExchange)) {
     		   //forward to 验证失败后controller
-           ServerHttpRequest errorReq = serverWebExchange.getRequest().mutate().path(Constant.AUTH_FAILED_PATH).build();
-           ServerWebExchange forwardExchange = serverWebExchange.mutate().request(errorReq).build();
-           return webFilterChain.filter(forwardExchange);
+    	    	   return WebfluxForwardingUtil.forward(Constant.AUTH_FAILED_PATH, serverWebExchange,null);
         }
         else {
         	   //forward to 反向代理reverse proxy controller
