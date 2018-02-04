@@ -23,7 +23,7 @@ import com.demo.http.api.gateway.util.WebfluxForwardingUtil;
 import reactor.core.publisher.Mono;
 
 /**
-* api反向代理控制器，转发调用后端服务
+* api反向代理控制器，转发调用后端服务。这个控制器的功能也可在过滤链的尾部放一个proxy过滤器来取代它
 * 
 * @author wang guobo 王国波
 */

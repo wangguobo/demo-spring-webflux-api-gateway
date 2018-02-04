@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 
 
 /**
-* 认证失败后控制器，这个控制器的功能也可用一个proxy过滤器取代
+* 认证失败后控制器,在dev分支中，auth过滤器直接创建过滤未通过的响应，所以在dev分支中这个控制器没用了
 * 
 * @author wang guobo 王国波
 */
