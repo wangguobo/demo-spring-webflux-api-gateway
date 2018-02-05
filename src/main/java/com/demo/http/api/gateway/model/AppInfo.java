@@ -16,6 +16,13 @@ public class AppInfo {
     public void setAppKey(String appKey) {
         this.appKey = appKey;
     }
-    
-    
+
+	public String getAppSecret() {
+		return appSecret;
+	}
+
+	public void setAppSecret(String appSecret) {
+		this.appSecret = appSecret;
+	}
+
 }
