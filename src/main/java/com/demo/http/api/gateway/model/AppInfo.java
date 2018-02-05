@@ -6,16 +6,8 @@ package com.demo.http.api.gateway.model;
 */
 public class AppInfo {
     String appKey;
-    String token;
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
+    //应用密钥
+    String appSecret;
 
     public String getAppKey() {
         return appKey;
@@ -24,4 +16,6 @@ public class AppInfo {
     public void setAppKey(String appKey) {
         this.appKey = appKey;
     }
+    
+    
 }
