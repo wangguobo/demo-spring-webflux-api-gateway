@@ -40,7 +40,7 @@ abstract public class AbstractGatewayWebFilter  implements WebFilter{
 	 */
 	protected abstract Mono<Void> doDenyResponse(ServerWebExchange exchange);
 	
-	//指示后续过滤器跳过对该请求的处理，不进入过滤器的doFilter方法
+	//指示后续过滤器跳过对该请求的实际处理：不进入过滤器的doFilter方法
 	protected void skipProcess(ServerWebExchange serverWebExchange) {
 		serverWebExchange.getAttributes().put(SKIP_PROCESSING_ATTR, true);
 	}

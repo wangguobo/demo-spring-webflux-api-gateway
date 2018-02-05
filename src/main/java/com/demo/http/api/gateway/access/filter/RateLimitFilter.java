@@ -18,12 +18,11 @@ public class RateLimitFilter  extends AbstractGatewayWebFilter  {
 
     @Override
 	protected Mono<Boolean> doFilter(ServerWebExchange exchange, WebFilterChain chain) {
-		return doRateLimit(exchange);
+    	   return doRateLimit(exchange);
 	}
 
 	@Override
 	protected Mono<Void> doDenyResponse(ServerWebExchange exchange) {
-		// TODO Auto-generated method stub
 		return Mono.empty();
 	}
 	
